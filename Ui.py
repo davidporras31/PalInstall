@@ -1,5 +1,5 @@
 import sys
-import Install
+import Installer
 import json
 import os
 
@@ -49,7 +49,7 @@ class PalInstallUI(QWidget):
         self.install_btn = QPushButton("Install")
         self.install_btn.clicked.connect(self.install)
         self.purge_btn = QPushButton("Purge")
-        self.purge_btn.clicked.connect(lambda: Install.purgeCollection(self))
+        self.purge_btn.clicked.connect(lambda: Installer.purgeCollection(self))
 
         buttons_layout = QHBoxLayout()
         buttons_layout.addWidget(self.install_btn)
@@ -80,7 +80,7 @@ class PalInstallUI(QWidget):
         if dir_name:
             self.collection_path_edit.setText(dir_name)
     def install(self):
-        Install.installCollection(self)
+        Installer.installCollection(self)
         # save last paths
         paths = {
             "game_path": self.game_file_edit.text(),
