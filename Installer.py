@@ -22,7 +22,7 @@ def installCollection(ui):
     
 
 
-    length =  len(os.listdir(collection_path))
+    length =  len([name for name in os.listdir(collection_path) if os.path.isfile(os.path.join(collection_path, name))])
     if length == 0:
         print("Collection path is empty.")
         return
@@ -68,7 +68,7 @@ def purgePath(path):
     if not os.path.isdir(path):
         print("Invalid path.")
         return
-    print("Starting purge")
+    print("purgeing path:", path)
     
     for root, dirs, files in os.walk(path):
         for file in files:
@@ -79,8 +79,6 @@ def purgePath(path):
                     print(f"Deleted {file_path}")
                 except Exception as e:
                     print(f"Error deleting {file_path}: {e}")
-    
-    print("Purge complete.")
 
 class InstallType(Enum):
     UE4SS = 1
@@ -118,7 +116,7 @@ def installFile(file_path, game_path):
             if file.endswith(".pak"):
                 names.append(file)
         if len(names) > 1:
-            dialog = Dialog.NameSelectionDialog(names)
+            dialog = Dialog.NameSelectionDialog("Multiple paks found","Select all paks to install:",names)
             if dialog.exec_() == QDialog.Accepted:
                 names = dialog.selected
             else:

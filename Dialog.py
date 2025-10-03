@@ -1,9 +1,9 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLabel, QListWidget, QPushButton
 
 class NameSelectionDialog(QDialog):
-    def __init__(self, names, parent=None):
+    def __init__(self,win_name, reson, names, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Select a Name")
+        self.setWindowTitle(win_name)
         self.selected:list = []
         self.selected.append(names[0])  # Default selection
 
@@ -11,7 +11,7 @@ class NameSelectionDialog(QDialog):
         layout = QVBoxLayout(self)
 
         # Label
-        label = QLabel("Please select a name:")
+        label = QLabel(reson)
         layout.addWidget(label)
 
         # List Widget
